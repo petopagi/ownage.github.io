@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Page</title>
+    <title>Coming Soon</title>
     <style>
         body {
             display: flex;
@@ -12,34 +12,49 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #000;
+            background-color: #333;
+            color: #fff;
         }
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
             text-align: center;
         }
-        .github-icon {
-            width: 100px;
-            height: 100px;
+        .message {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .countdown {
+            font-size: 1.5em;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="glass">
-            <a href="https://discord.com" target="_blank">
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="github-icon">
-            </a>
-        </div>
+        <div class="message">Coming Soon</div>
+        <div class="countdown" id="countdown"></div>
     </div>
+    <script>
+        // Countdown Timer
+        const countdown = document.getElementById('countdown');
+        const targetDate = new Date('2025-01-01T00:00:00'); // Set your target date here
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (diff < 0) {
+                clearInterval(timer);
+                countdown.innerHTML = 'We have launched!';
+            }
+        }
+
+        const timer = setInterval(updateCountdown, 1000);
+    </script>
 </body>
 </html>
